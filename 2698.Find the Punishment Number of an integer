@@ -1,0 +1,34 @@
+class Solution {
+    public int punishmentNumber(int n) {
+        int result = 0;
+        
+        for (int i = 1; i <= n; i++) {
+            int square = i * i;
+            if (canPartition(String.valueOf(square), 0, i)) {
+                result += square;
+            }
+        }
+        
+        return result;
+    }
+
+    // Helper function to check if we can partition square into parts summing to target
+    private boolean canPartition(String str, int index, int target) {
+        if (index == str.length()) {
+            return target == 0; // If we've used all digits and target becomes 0, it's valid
+        }
+
+        int num = 0;
+        for (int i = index; i < str.length(); i++) {
+            num = num * 10 + (str.charAt(i) - '0'); // Convert substring to number
+            if (num > target) {
+                break; // No need to continue if num exceeds target
+            }
+            if (canPartition(str, i + 1, target - num)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}
