@@ -1,0 +1,10 @@
+class Solution {
+    public int findMin(int[] nums) {
+        int n = nums.length;
+        int result = 0;
+        Arrays.sort(nums);
+        result = nums[0];
+
+        return result;
+    }
+}
