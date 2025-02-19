@@ -1,0 +1,27 @@
+class Solution {
+    private void backtrack(int n, StringBuilder current, List<String> result) {
+        // Base case: If the string reaches length n, add it to the result list
+        if (current.length() == n) {
+            result.add(current.toString());
+            return;
+        }
+
+        // Try adding 'a', 'b', and 'c' to the current string
+        for (char ch : new char[]{'a', 'b', 'c'}) {
+            // Add character only if it’s different from the previous character
+            if (current.length() == 0 || current.charAt(current.length() - 1) != ch) {
+                current.append(ch);               // Choose
+                backtrack(n, current, result);     // Explore
+                current.deleteCharAt(current.length() - 1); // Backtrack
+            }
+        }
+    }
+
+    public String getHappyString(int n, int k) {
+        List<String> happyStrings = new ArrayList<>();
+        backtrack(n, new StringBuilder(), happyStrings);
+
+        // Return kth happy string if it exists; otherwise return empty string
+        return (k <= happyStrings.size()) ? happyStrings.get(k - 1) : "";
+    }
+}
