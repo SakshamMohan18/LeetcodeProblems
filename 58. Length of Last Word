@@ -1,0 +1,13 @@
+class Solution {
+    public int lengthOfLastWord(String s) {
+        s = s.trim();  // Remove leading and trailing spaces
+        int last = s.length() - 1;
+        int count = 0;
+        while( last >= 0 && s.charAt(last) != ' '){
+                count++;
+                last--;
+        }
+        return count;
+    }
+}
+
