@@ -1,0 +1,32 @@
+class Solution {
+    public int myAtoi(String s) {
+        s = s.trim(); // Remove leading and trailing spaces
+        if (s.isEmpty()) return 0; // Edge case: empty string after trimming
+
+        int sign = 1;   // To handle '+' or '-' sign
+        int i = 0;
+        int num = 0;
+        int n = s.length();
+
+        // Handle sign
+        if (i < n && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
+            sign = (s.charAt(i) == '-') ? -1 : 1;
+            i++; // Move past the sign
+        }
+
+        // Convert characters to number until non-digit is found
+        while (i < n && Character.isDigit(s.charAt(i))) {
+            int digit = s.charAt(i) - '0';
+
+            // Handle integer overflow/underflow
+            if (num > (Integer.MAX_VALUE - digit) / 10) {
+                return (sign == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+
+            num = num * 10 + digit; // Append the digit to the result
+            i++;
+        }
+
+        return num * sign; // Return the final result with sign
+    }
+}
