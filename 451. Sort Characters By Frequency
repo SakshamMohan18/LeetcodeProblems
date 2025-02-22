@@ -1,0 +1,21 @@
+import java.util.*;
+
+class Solution {
+    public String frequencySort(String s) {
+        // Step 1: Count the frequency of each character
+        Map<Character, Integer> freq = new HashMap<>();
+        for (char ch : s.toCharArray()) {
+            freq.put(ch, freq.getOrDefault(ch, 0) + 1);
+        }
+        List<Character> temp = new ArrayList<>(freq.keySet());
+        Collections.sort(temp, (a, b) -> freq.get(b) - freq.get(a));
+        StringBuilder result = new StringBuilder();
+        for (char c : temp) {
+            int count = freq.get(c);
+            for (int i = 0; i < count; i++) {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
+}
