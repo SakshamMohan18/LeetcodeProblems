@@ -1,0 +1,16 @@
+class Solution {
+    // Function to count nodes of a linked list.
+    public int getCount(Node head) {
+        
+        int count = 1;
+        if(head == null) return 0;
+        
+        Node current = head;
+        
+        while(current.next != null){
+            current = current.next;
+            count++;
+        }
+        return count;
+    }
+}
