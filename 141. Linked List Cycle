@@ -1,0 +1,22 @@
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        // If the list is empty or has only one node, it can't have a cycle
+        if (head == null || head.next == null) {
+            return false;
+        }
+
+        ListNode prev = head;
+        ListNode current = head.next;
+
+        while (current != null && current.next != null) {
+
+            prev = prev.next;
+            current = current.next.next;
+
+            if (prev == current) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
