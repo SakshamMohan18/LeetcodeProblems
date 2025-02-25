@@ -1,0 +1,21 @@
+public class Solution {
+    public ListNode detectCycle(ListNode head) { 
+        Map<ListNode, Boolean> result = new HashMap<>();
+
+        if(head == null || head.next == null){
+            return null;
+        }
+        ListNode current = head;
+
+        while(current != null){
+
+            if(result.containsKey(current)){
+                return current;
+            }else {
+                result.put(current, true);
+            }
+            current = current. next;
+        }
+        return null;
+    }
+}
