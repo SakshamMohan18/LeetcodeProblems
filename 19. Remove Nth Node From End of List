@@ -1,0 +1,28 @@
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        List<Integer> temp = new ArrayList<>();
+
+        // Step 1: Store linked list values in the ArrayList
+        ListNode current = head;
+        while (current != null) {
+            temp.add(current.val);
+            current = current.next;
+        }
+
+        // Step 2: Remove the target element
+        int index = temp.size() - n;
+        temp.remove(index);
+
+        // Edge case: If list becomes empty
+        if (temp.isEmpty()) return null;
+
+        // Step 3: Rebuild the linked list from the updated ArrayList
+        ListNode newHead = new ListNode(temp.get(0));
+        current = newHead;
+        for (int i = 1; i < temp.size(); i++) {
+            current.next = new ListNode(temp.get(i));
+            current = current.next;
+        }
+        return newHead;  // Step 4: Return the new head
+    }
+}
