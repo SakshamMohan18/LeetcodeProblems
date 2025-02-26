@@ -1,0 +1,19 @@
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+        int maxEndingHere = 0, maxSoFar = 0;
+        int minEndingHere = 0, minSoFar = 0;
+
+        for (int num : nums) {
+            // Max subarray sum calculation (Kadane's)
+            maxEndingHere = Math.max(num, maxEndingHere + num);
+            maxSoFar = Math.max(maxSoFar, maxEndingHere);
+
+            // Min subarray sum calculation (for negative subarrays)
+            minEndingHere = Math.min(num, minEndingHere + num);
+            minSoFar = Math.min(minSoFar, minEndingHere);
+        }
+
+        // The maximum absolute sum can be from either max or min subarray sums
+        return Math.max(Math.abs(maxSoFar), Math.abs(minSoFar));
+    }
+}
