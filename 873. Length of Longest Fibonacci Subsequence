@@ -1,0 +1,34 @@
+import java.util.HashSet;
+
+class Solution {
+    public int lenLongestFibSubseq(int[] arr) {
+        int n = arr.length;
+        HashSet<Integer> set = new HashSet<>();
+        for (int num : arr) {
+            set.add(num);  // Store all numbers in HashSet for fast lookup
+        }
+
+        int maxLen = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int a = arr[i], b = arr[j];
+                int length = 2; // Start with two elements
+
+                // Try to extend the sequence
+                while (set.contains(a + b)) {
+                    int next = a + b;
+                    a = b;
+                    b = next;
+                    length++;
+                }
+
+                if (length > 2) {  // A valid sequence must have at least 3 numbers
+                    maxLen = Math.max(maxLen, length);
+                }
+            }
+        }
+
+        return maxLen;
+    }
+}
