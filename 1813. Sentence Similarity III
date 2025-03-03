@@ -1,0 +1,29 @@
+class Solution {
+    public boolean areSentencesSimilar(String sentence1, String sentence2) {
+        String[] st1 = sentence1.split(" ");
+        String[] st2 = sentence2.split(" ");
+
+        if (st1.length < st2.length) {
+            return isSubsequence(st1, st2);
+        } else {
+            return isSubsequence(st2, st1);
+        }
+    }
+
+    private boolean isSubsequence(String[] small, String[] large) {
+       int i = 0;
+       int j = 0;
+
+       while( i < small.length && small[i].equals(large[j])){
+        i++;
+        j++;
+       }
+
+       int k = large.length -1; int l = small.length - 1;
+       while( l >= i && small[l].equals(large[k])){
+        l--;
+        k--;
+       }
+       return l < i;
+    }
+}
