@@ -1,0 +1,26 @@
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        int[] temp = new int[nums.length];
+        int i = 0;
+        int count = 0;
+        for (int num : nums) {
+            if (num < pivot) {
+                temp[i++] = num;
+            } else if (num == pivot) {
+                count++;
+            }
+        }
+
+        for (int a = 0; a < count; a++) {
+            temp[i++] = pivot;
+        }
+
+        for (int num : nums) {
+            if (num > pivot) {
+                temp[i++] = num;
+            }
+        }
+        return temp;
+
+    }
+}
