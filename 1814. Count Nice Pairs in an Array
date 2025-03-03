@@ -1,0 +1,24 @@
+class Solution {
+    public int countNicePairs(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0, mod = 1_000_000_007;
+
+        for (int num : nums) {
+            int diff = num - rev(num);
+            count = (count + map.getOrDefault(diff, 0)) % mod;
+            map.put(diff, map.getOrDefault(diff, 0) + 1);
+        }
+
+        return count;
+    }
+
+    private static int rev(int num){
+        int reverse = 0;
+        while( num > 0){
+            reverse = reverse * 10 + num % 10;
+            num /= 10;
+        }
+        return reverse;
+
+    }
+}
