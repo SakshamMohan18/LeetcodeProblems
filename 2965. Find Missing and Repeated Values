@@ -1,0 +1,29 @@
+class Solution {
+    public int[] findMissingAndRepeatedValues(int[][] grid) {
+        int n = grid.length;
+        int totalElements = n * n;
+
+        // create a new freq array
+        int[] temp = new int[totalElements + 1];
+
+        int repeated = -1, missing = -1;
+
+        // fill the temp array
+        for (int[] row : grid) {
+            for (int num : row) {
+                temp[num]++;
+            }
+        }
+
+        //identify repeated and missing elements
+        for(int i = 1; i <= totalElements; i++){
+            if(temp [i] >= 2){
+                repeated = i;
+            }
+            if(temp[i] == 0){
+                missing = i;
+            }
+        }
+        return new int[]{repeated, missing};
+    }
+}
