@@ -1,0 +1,18 @@
+class GfG {
+    public Stack<Integer> sort(Stack<Integer> s) {
+        // add code here.
+        int n = s.size();
+        int[] temp = new int[n];
+        int i = 0;
+        while(!s.isEmpty()){
+            temp[i] = s.pop();
+            i++;
+        }
+        Arrays.sort(temp);
+        
+        for(int j = 0; j < temp.length; j++){
+            s.push(temp[j]);
+        }
+        return s;
+    }
+}
