@@ -1,0 +1,32 @@
+class Solution {
+    // Function to check if a number is prime
+    private boolean isPrime(int num) {
+        if (num < 2) return false;
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+
+    public int[] closestPrimes(int left, int right) {
+        int first = -1, second = -1;
+        int prevPrime = -1; // Track the last found prime
+
+        // Iterate through the range to find primes
+        for (int i = left; i <= right; i++) {
+            if (isPrime(i)) {
+                if (prevPrime != -1) {
+                    // First valid pair
+                    if (first == -1 || (i - prevPrime < second - first)) {
+                        first = prevPrime;
+                        second = i;
+                    }
+                }
+                prevPrime = i; // Update the last found prime
+            }
+        }
+
+        return new int[]{first, second};
+    }
+}
+a
