@@ -1,0 +1,31 @@
+class Solution {
+    public int minZeroArray(int[] nums, int[][] queries) {
+        int n = nums.length, sum = 0, k = 0;  // n = size of nums, sum = prefix sum, k = count of used queries
+        int[] differenceArray = new int[n + 1];  // Difference array for efficient range updates
+
+        // Iterate through nums
+        for (int index = 0; index < n; index++) {
+            while (sum + differenceArray[index] < nums[index]) {  
+                k++;  // Increment query usage count
+
+                // If we've used all queries and still can't make nums[index] zero, return -1
+                if (k > queries.length) {  
+                    return -1;
+                }
+
+                // Extract left, right, and value from the next query
+                int left = queries[k - 1][0];  
+                int right = queries[k - 1][1];  
+                int val =  queries[k - 1][2];  
+
+                // Apply range update using the difference array technique
+                if (right >= index) {  
+                    differenceArray[Math.max(left, index)] += val;
+                    differenceArray[right + 1] -= val;
+                }
+            }
+            sum += differenceArray[index];  
+        }
+        return k;
+    }
+}
