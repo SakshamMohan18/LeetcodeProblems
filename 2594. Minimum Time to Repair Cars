@@ -1,0 +1,40 @@
+class Solution {
+    public long repairCars(int[] ranks, int cars) {
+        long left = 1;
+        long right = (long) cars * cars * getMin(ranks); // Maximum possible time
+        long ans = right;
+
+        while (left <= right) {
+            long mid = left + (right - left) / 2;
+
+            if (canRepairAll(ranks, cars, mid)) {
+                ans = mid;
+                right = mid - 1; // Try to minimize time
+            } else {
+                left = mid + 1; // Increase time if not enough cars repaired
+            }
+        }
+
+        return ans;
+    }
+
+    // Helper function to check if all cars can be repaired within 'mid' time
+    private boolean canRepairAll(int[] ranks, int cars, long mid) {
+        long totalCars = 0;
+        for (int rank : ranks) {
+            // Calculate number of cars a mechanic with 'rank' can repair in 'mid' time
+            totalCars += (long) Math.sqrt(mid / rank);
+            if (totalCars >= cars) return true; // Early exit if enough cars repaired
+        }
+        return totalCars >= cars;
+    }
+
+    // Helper function to find the minimum rank
+    private int getMin(int[] ranks) {
+        int min = Integer.MAX_VALUE;
+        for (int rank : ranks) {
+            min = Math.min(min, rank);
+        }
+        return min;
+    }
+}
